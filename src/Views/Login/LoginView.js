@@ -1,18 +1,41 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Form, Icon, Input, Button } from "antd";
 import "./index.less";
+import { isFulfilled } from "q";
 
 export default class LoginView extends Component {
   render() {
     return (
       <>
         <br />
+        <br />
         <Row type="flex" justify="center" align="middle">
-          <Col>
-            <Card style={{ width: 500 }}>
-              <Form onSubmit={this.handleSubmit} className="login-form">
+          <Col style={{ width: 450 }}>
+            <Card
+              xs={24}
+              sm={24}
+              md={8}
+              lg={8}
+              xl={8}
+              style={{ width: isFulfilled }}
+              hoverable
+            >
+              <Form
+                xs={24}
+                sm={24}
+                md={8}
+                lg={8}
+                xl={8}
+                onSubmit={this.handleSubmit}
+                className="login-form"
+              >
                 <Form.Item>
                   <Input
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={12}
+                    xl={12}
                     prefix={
                       <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
@@ -21,6 +44,11 @@ export default class LoginView extends Component {
                 </Form.Item>
                 <Form.Item>
                   <Input
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={12}
+                    xl={12}
                     prefix={
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
@@ -29,8 +57,8 @@ export default class LoginView extends Component {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <Row gutter={[16, 16]} className="btn-row">
-                    <Col span={12}>
+                  <Row gutter={[12]} className="btn-row">
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                       <Button
                         type="primary"
                         block
@@ -40,7 +68,7 @@ export default class LoginView extends Component {
                         이메일 로그인
                       </Button>
                     </Col>
-                    <Col span={12}>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                       <Button
                         type="primary"
                         block
@@ -50,7 +78,7 @@ export default class LoginView extends Component {
                         페이스북 로그인
                       </Button>
                     </Col>
-                    <Col span={12}>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                       <Button
                         type="primary"
                         block
@@ -60,7 +88,7 @@ export default class LoginView extends Component {
                         구글 로그인
                       </Button>
                     </Col>
-                    <Col span={12}>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                       <Button
                         type="primary"
                         block
