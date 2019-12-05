@@ -143,20 +143,30 @@ export default class LoginView extends Component {
                       </Button>
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                      <Button
-                        type="primary"
+                      {/* <Button
+                        type="link"
                         block
                         htmlType="submit"
-                        className="google"
-                      >
-                        <GoogleLogin
-                          clientId="1092800745543-f9npagl8ktirq03cjf00ms8l5qpavevf.apps.googleusercontent.com"
-                          buttonText="구글 로그인"
-                          onSuccess={this.responseGoogle}
-                          onFailure={this.responseGoogle}
-                          cookiePolicy={"single_host_origin"}
-                        />
-                      </Button>
+                        // className="google"
+                      > */}
+                      <GoogleLogin
+                        clientId="1092800745543-f9npagl8ktirq03cjf00ms8l5qpavevf.apps.googleusercontent.com"
+                        render={renderProps => (
+                          <Button
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className="google"
+                            block
+                          >
+                            구글 로그인
+                          </Button>
+                        )}
+                        buttonText="구글 로그인"
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                        cookiePolicy={"single_host_origin"}
+                      />
+                      {/* </Button> */}
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                       <Button

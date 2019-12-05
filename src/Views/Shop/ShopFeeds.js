@@ -22,7 +22,7 @@ export default class ShopFeeds extends Component {
           style={{ width: 300, display: "inline-block", margin: 30 }}
           hoverable
         >
-          <Meta title={children.item_desc} />
+          <Meta title={"d" + children.item_desc} />
         </Card>
       </>
     );
