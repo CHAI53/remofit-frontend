@@ -1,0 +1,33 @@
+{
+  "mainpic": "https://img.08liter.com/bo/brand/a4116d8cf9954e0ea8f7ed71277c9626320",
+
+  "company_name": "라플레",
+  "company_sub": "리커버리 건강 브랜드",
+  "company_desc": "#건강식품 #라플레 #암환자 #면역력 #항산화 #장건강 #베타글루칸 #비타민D #퀘르세틴 ",
+  "item": [
+    {
+      "item_pic": "https://img.08liter.com/release/product/7b82e5e38e7d4963bfcf29cf10d59f95640",
+      "item_desc": "염창환 박사의 3세대 유산균, 인빅터스 프로"
+    },
+    {
+      "item_pic": "https://img.08liter.com/release/product/fe27b0e08d4c4ef680d11d6f53f2b602640",
+      "item_desc": "약해진 피부엔 닥터라플레 올인원 로션"
+    },
+    {
+      "item_pic": "https://img.08liter.com/dev/product/2351c561b0bb417eba6d194eb08ea509640",
+      "item_desc": "허니플라밍고 조개캔들 SET"
+    },
+    {
+      "item_pic": "https://img.08liter.com/release/product/a334306cbbd8463a9c58ca1cae446614640",
+      "item_desc": "염증을 청소하는 퀘르세틴, 셀시우스"
+    },
+    {
+      "item_pic": "https://img.08liter.com/release/product/6ed4df4879814116a6b842503b288389640",
+      "item_desc": "우리가족 면역지킴이, 인빅터스 1316"
+    },
+    {
+      "item_pic": "https://img.08liter.com/release/product/41e7f96720284a10ac135b3fc0e7a178640",
+      "item_desc": "식이유황, 인빅터스 옵티엠에스엠"
+    }
+  ]
+}
