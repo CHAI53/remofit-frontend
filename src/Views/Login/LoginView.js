@@ -51,7 +51,16 @@ export default class LoginView extends Component {
       userLoginTypeCd: "013"
     });
     console.log(this.state);
+    fetch("", {
+      method: "post",
+      headers: { Authorization: localStorage.getItem("fb_access_token") },
+      body: JSON.stringify({
+        email: this.state.email,
+        name: this.state.name
+      })
+    });
   };
+  //headers 에 token 넣어줘야한다.
 
   responseGoogle = response => {
     localStorage.setItem("access_token", response.accessToken);
@@ -95,11 +104,14 @@ export default class LoginView extends Component {
               xl={8}
               style={{
                 width: isFulfilled,
-                backgroundImage: "-webkit-linear-gradient(top, #fff, #3b589893)"
+                backgroundImage: "-webkit-linear-gradient(top, #fff, #E2E4E4)"
               }}
               hoverable
             >
-              <img className="imgtest" src={loginimg} alt="" />
+              <Row type="flex" justify="center" align="middle">
+                <img className="imgtest" src={loginimg} alt="" />
+              </Row>
+
               <Form
                 xs={24}
                 sm={24}
@@ -169,22 +181,8 @@ export default class LoginView extends Component {
                         callback={this.fb}
                         fields="name,email"
                       />
-                      {/* <FacebookLogin
-                        appId="737826633381169"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        // onClick={this.fb}
-                        callback={this.fb}
-                        textButton="페이스북 로그인"
-                      /> */}
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                      {/* <Button
-                        type="link"
-                        block
-                        htmlType="submit"
-                        // className="google"
-                      > */}
                       <GoogleLogin
                         clientId="1092800745543-f9npagl8ktirq03cjf00ms8l5qpavevf.apps.googleusercontent.com"
                         render={renderProps => (
