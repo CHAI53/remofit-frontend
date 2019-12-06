@@ -13,15 +13,23 @@ import {
 import "./index.less";
 
 export default class ShopDetailView extends Component {
-  componentDidMount() {}
+  state = {
+    itemImg: "",
+    itemTi: ""
+  };
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/Data/mockup.json`, {
+      method: "get"
+    }).then(res => res.json());
+  }
+
   render() {
     const { Countdown } = Statistic;
     const { TabPane } = Tabs;
     const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
     const text = `
-    용량 또는 중량
-75g
-제품 주요사양
+    용량 또는 중량 75g 제품 주요사양
 자몽추출물이 함유되어 더욱 상쾌한 클렌징!
 촉촉한 샤베트 타입으로, 고체 형태의 오일이 밤 형태로 존재하다가 피부 온도에 반응하여 부드럽게 사르르 녹아 말끔하게 클렌징 해줍니다.
 사용기한 또는 개봉후 사용기간
@@ -55,84 +63,105 @@ export default class ShopDetailView extends Component {
     }
 
     return (
-      <Row>
-        <Col className="photoCol" span={8}>
+      <Row type="flex" justify="center">
+        <Col className="photoCol" xs={24} xl={8}>
           <Card
             hoverable
             style={{
               width: 350,
               height: 500,
-              margin: "50px",
+              margin: "20%",
               borderRadius: "5px"
             }}
             cover={
               <Carousel autoplay>
                 <div className="photoSlider">
-                  <div className="slide1">a</div>
+                  <div className="slide1">_</div>
                 </div>
                 <div className="photoSlider">
-                  <div className="slide2">aa</div>
+                  <div className="slide2">-</div>
                 </div>
                 <div className="photoSlider">
-                  <div className="slide3">aaa</div>
+                  <div className="slide3">-</div>
                 </div>
               </Carousel>
             }
           ></Card>
         </Col>
-        <Col className="info" span={14}>
-          <Card className="product">
-            <p>지나 인 스킨 자몽 비타 필링 스틱</p>
-          </Card>
-          <Divider />
+        <Col className="info" xs={24} xl={14}>
+          <Row type="flex" justify="center" align="middle">
+            <Col span={24}>
+              <Card className="product">
+                <p>지나 인 스킨 자몽 비타 필링 스틱</p>
+              </Card>
+              <Divider />
+            </Col>
+          </Row>
           <br />
           <br />
           <br />
+          <div>{Date.now()}</div>
           <br />
-          <Divider />
-          <Countdown
-            title="남은 시간"
-            className="leftTime"
-            value={deadline}
-            onFinish={onFinish}
-            style={{
-              display: "inline-block",
-              margin: " 10px 60px",
-              fontWeight: "700"
-            }}
-          />
-          <Statistic
-            title="남은 수량"
-            className="abc"
-            value={35}
-            style={{
-              display: "inline-block",
-              margin: "10px 60px",
-              fontWeight: "700"
-            }}
-          />
-          <Divider />
-          <div className="optionInputDesc">선택사항 입력</div>
-          <Input
-            className="optionInput"
-            placeholder="Basic usage"
-            size="large"
-          />
-          <Button className="purchaseBtn" type="primary" block size="large">
-            ￦3,000 경험하기 (VAT 별도)
-          </Button>
-          <Tabs defaultActiveKey="1">
-            <TabPane tab="상품 설명" key="1">
-              <div>{text}</div>
-            </TabPane>
-            <TabPane tab="상품 이미지" key="2">
-              <img
-                className="productImg"
-                src="https://img.08liter.com/release/product/b1ec8406c826477bba3a5d1e5a8e8b21640"
-                alt=""
+          <Row type="flex" justify="center" align="middle">
+            <Col span={24}>
+              <Divider />
+              <Countdown
+                title="남은 시간"
+                className="leftTime"
+                value={deadline}
+                onFinish={onFinish}
+                style={{
+                  display: "inline-block",
+                  margin: " 10px 60px",
+                  fontWeight: "700"
+                }}
               />
-            </TabPane>
-          </Tabs>
+              <Statistic
+                title="남은 수량"
+                className="abc"
+                value={35}
+                style={{
+                  display: "inline-block",
+                  margin: "10px 60px",
+                  fontWeight: "700"
+                }}
+              />
+              <Divider />
+            </Col>
+          </Row>
+          <Row type="flex" justify="center" align="middle">
+            <Col span={24}>
+              <div className="optionInputDesc">선택사항 입력</div>
+              <Input
+                className="optionInput"
+                placeholder="선택사항을 입력해주세요"
+                size="large"
+              />
+            </Col>
+          </Row>
+          <Row type="flex" justify="center" align="middle">
+            <Col span={24}>
+              <Button className="purchaseBtn" type="primary" block size="large">
+                ￦3,000 경험하기 (VAT 별도)
+              </Button>
+            </Col>
+          </Row>
+          <Row type="flex" justify="center" align="middle">
+            <Col span={24}>
+              <Tabs defaultActiveKey="1">
+                <TabPane tab="상품 설명" key="1">
+                  <div>{text}</div>
+                </TabPane>
+                <TabPane tab="상품 이미지" key="2">
+                  <img
+                    className="productImg"
+                    src="https://img.08liter.com/release/product/b1ec8406c826477bba3a5d1e5a8e8b21640"
+                    alt=""
+                  />
+                </TabPane>
+              </Tabs>
+            </Col>
+          </Row>
         </Col>
       </Row>
     );
