@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Row, Card } from "antd";
-import { ShowMockup } from "../../config.js";
+import { Row, Card, BackTop, Statistic } from "antd";
+import { ShowMockup } from "config.js";
 import "./index.less";
 import ShopFeeds from "./ShopFeeds.js";
+
 const { Meta } = Card;
 
 export default class ShopView extends Component {
@@ -23,12 +24,13 @@ export default class ShopView extends Component {
             data: info
           },
           () => {
-            console.log("데이터받아온 후", this.state);
+            // console.log("데이터받아온 후", this.state);
           }
         );
       });
     // console.log(this.state);
   }
+
   render() {
     const { data } = this.state;
     return (
@@ -46,22 +48,24 @@ export default class ShopView extends Component {
                 <div
                   className="background"
                   style={{
-                    backgroundImage: `url(${data.mainpic})`
+                    backgroundImage: `url(${data.shopTiImg})`
                   }}
                 />
               }
             >
               <Meta
-                title={data.company_name}
-                description={data.company_sub}
+                title={data.shopTi}
+                description={data.shopSubTi}
                 style={{ textAlign: "center" }}
               />
-              <Meta
-                title="&nbsp;"
-                description={data.company_desc}
-                style={{ textAlign: "center" }}
-              />
+
               <br />
+              <div className="hash-tag">
+                {this.state.data.shopTypeCd &&
+                  this.state.data.shopTypeCd.map((e, index) => (
+                    <span>{"#" + e.tagName + " "}</span>
+                  ))}
+              </div>
               <div className="item-wrapper">
                 <Row type="flex" justify="center">
                   {this.state.data.item &&
@@ -73,6 +77,7 @@ export default class ShopView extends Component {
             </Card>
           </Row>
         </div>
+        <BackTop style={{ right: 10, bottom: 10 }} />
       </>
     );
   }
