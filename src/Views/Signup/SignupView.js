@@ -8,7 +8,8 @@ export default class SignupView extends Component {
     email: "",
     password: "",
     passwordChk: "",
-    is_agreed: false
+    isAgreed: false,
+    userLoginTypeCd: "010"
   };
 
   handleSubmit = e => {
@@ -19,7 +20,8 @@ export default class SignupView extends Component {
     //     method: "post",
     //     body: JSON.stringify({
     //       email,
-    //       password
+    //       password,
+    //       userLoginTypeCd
     //     })
     //   })
     //     .then(res => res.json())
@@ -30,15 +32,25 @@ export default class SignupView extends Component {
   };
 
   handleChange = e => {
-    this.setState = {
-      [e.target.name]: e.target.value
-    };
+    this.setState(
+      {
+        [e.target.name]: e.target.value
+      },
+      () => {
+        console.log("input ok");
+      }
+    );
   };
 
-  handleAgree = e => {
-    this.setState = {
-      is_agreed: true
-    };
+  checkAgreed = e => {
+    this.setState(
+      {
+        isAgreed: true
+      },
+      () => {
+        console.log("agreeeee");
+      }
+    );
   };
 
   goToLogin = () => {
@@ -62,7 +74,7 @@ export default class SignupView extends Component {
                   onChange={this.handleChange}
                 />
                 {email && (!email.includes("@") || !email.includes(".")) ? (
-                  <div>이메일 형식이 올바르지 않습니다</div>
+                  <div> 이메일 형식이 올바르지 않습니다.</div>
                 ) : (
                   ""
                 )}
@@ -89,7 +101,7 @@ export default class SignupView extends Component {
                 )}
               </Form.Item>
               <Form.Item>
-                <Checkbox onChange={this.handleAgree}>
+                <Checkbox onChange={this.checkAgreed}>
                   이용약관 및 개인정보처리방침에 동의합니다.
                 </Checkbox>
               </Form.Item>
