@@ -54,7 +54,7 @@ export default class SignupView extends Component {
   };
 
   goToLogin = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {

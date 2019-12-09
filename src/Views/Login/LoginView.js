@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Form, Icon, Input, Button } from "antd";
 import { isFulfilled } from "q";
-import { loginimg } from "config.js";
+import { loginimg, Google_Login, Facebook_Login, Kakao_Login } from "config.js";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import KakaoLogin from "react-kakao-login";
@@ -9,10 +9,12 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import "./index.less";
 
 export default class LoginView extends Component {
-  state = {};
+  state = {
+    userLoginTypeCd: "010"
+  };
   Setemail = e => {
     this.setState({ id: e.target.value }, () => {
-      console.log(this.state.id);
+      console.log(this.state);
     });
   };
 
@@ -24,56 +26,60 @@ export default class LoginView extends Component {
 
   HandleClick = e => {
     fetch("", {
-      method: "POST",
+      method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: this.state.id,
-        pw: this.state.pw
+        pw: this.state.pw,
+        userLoginTypeCd: this.state.userLoginTypeCd
       })
     });
   };
 
-  //카카오로그인 시,  localstorage에 토큰 저장되고, shop으로 넘어감 (나중에 fetch로 토큰 보내고 확인후에 넘어가게 만들어야됨)
-
-  Facebooklogin = () => {
-    window.FB.login(function(response) {
-      console.log(response);
-      localStorage.setItem("access_token", response.authResponse.accessToken);
-    });
-    // this.props.history.push("/Shop");
-  };
-  //페이스북 로그인, fetch로 back에 보내고 확이 후 넘어가게 만들어야됨
   fb = response => {
-    localStorage.setItem("fb_access_token", response.accessToken);
+    console.log(response);
+    localStorage.setItem("fb_access_token", response.signedRequest);
     this.setState({
       name: response.name,
       email: response.email,
       userLoginTypeCd: "013"
     });
     console.log(this.state);
-    fetch("", {
-      method: "post",
-      headers: { Authorization: localStorage.getItem("fb_access_token") },
-      body: JSON.stringify({
-        email: this.state.email,
-        name: this.state.name
-      })
-    });
+    // fetch(Facebook_Login, {
+    //   method: "post",
+    //   headers: { Authorization: localStorage.getItem("fb_access_token") },
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     name: this.state.name,
+    //     userLoginTypeCd: this.state.userLoginTypeCd
+    //   })
+    // });
   };
-  //headers 에 token 넣어줘야한다.
 
   responseGoogle = response => {
-    localStorage.setItem("access_token", response.accessToken);
+    console.log("구글", response);
+    localStorage.setItem("google_access_token", response.Zi.id_token);
     this.setState(
       { name: response.w3.ig, email: response.w3.U3, userLoginTypeCd: "012" },
       () => {
         console.log(this.state);
       }
     );
+    // fetch(Google_Login, {
+    //   method: "post",
+    //   headers: { Authorization: localStorage.getItem("google_access_token") },
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     name: this.state.name,
+    //     userLoginTypeCd: this.state.userLoginTypeCd
+    //   })
+    // });
     // this.props.history.push("/Shop");
   };
+
   responseKakao = response => {
-    localStorage.setItem("kakao_access_token", response.response.access_token);
+    console.log(response);
+    localStorage.setItem("kakao_access_token", response.response.refresh_token);
     // console.log(response);
     this.setState(
       {
@@ -85,6 +91,15 @@ export default class LoginView extends Component {
         console.log(this.state);
       }
     );
+    // fetch(Kakao_Login, {
+    //   method: "post",
+    //   headers: { Authorization: localStorage.getItem("kakao_access_token") },
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     name: this.state.name,
+    //     userLoginTypeCd: this.state.userLoginTypeCd
+    //   })
+    // });
   };
   //구글 로그인, fetch로 back에 보내고 확이 후 넘어가게 만들어야됨
 
@@ -223,7 +238,7 @@ export default class LoginView extends Component {
                       <span style={{ paddingRight: "10px" }}>
                         아직 회원이 아니신가요?
                       </span>
-                      <Link to={"/"}>
+                      <Link to={"/signup"}>
                         <span>회원가입</span>
                       </Link>
                     </div>
@@ -233,8 +248,6 @@ export default class LoginView extends Component {
             </Card>
           </Col>
         </Row>
-        백에다가 소셜로그인 시 fetch의 body에 state에 있는 email, name, type을
-        보내고, storage에 있는 각 토큰을 보내줘야 한다.
       </>
     );
   }

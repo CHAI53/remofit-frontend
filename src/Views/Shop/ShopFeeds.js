@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Row, Card, Statistic } from "antd";
+import { Card, Statistic } from "antd";
 import "./index.less";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import Moment from "react-moment";
-import { format } from "path";
 
 export default class ShopFeeds extends Component {
   state = {};
@@ -55,7 +53,6 @@ export default class ShopFeeds extends Component {
             borderRadius: "30px"
           }}
           hoverable
-          className="PullDown"
         >
           <Meta title={children.itemTi} style={{ width: "auto" }} />
         </Card>

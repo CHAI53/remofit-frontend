@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Card, BackTop, Statistic } from "antd";
+import { Row, Card, BackTop } from "antd";
 import { ShowMockup } from "config.js";
 import "./index.less";
 import ShopFeeds from "./ShopFeeds.js";
