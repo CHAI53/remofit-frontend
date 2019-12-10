@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Card, Form, Input, Button, Checkbox } from "antd";
 // import { API } from "src/config.js";
+import { isFulfilled } from "q";
 import "./index.less";
 
 export default class SignupView extends Component {
@@ -54,7 +55,7 @@ export default class SignupView extends Component {
   };
 
   goToLogin = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {
@@ -64,7 +65,13 @@ export default class SignupView extends Component {
     return (
       <Row type="flex" justify="center">
         <Col xs={24} xl={8}>
-          <Card className="signupCard">
+          <Card
+            className="signupCard"
+            style={{
+              width: isFulfilled,
+              backgroundImage: "-webkit-linear-gradient(top, #fff, #E2E4E4)"
+            }}
+          >
             <Form onSubmit={this.handleSubmit} className="signupForm">
               <Form.Item className="formInput">
                 <Input
@@ -111,6 +118,7 @@ export default class SignupView extends Component {
                   htmlType="submit"
                   size="large"
                   className="login-form-button"
+                  style={{ color: "black", fontWeight: 600 }}
                 >
                   가입하기
                 </Button>
