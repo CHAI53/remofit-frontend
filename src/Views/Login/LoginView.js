@@ -81,27 +81,23 @@ export default class LoginView extends Component {
     console.log(response);
     localStorage.setItem("kakao_access_token", response.response.access_token);
     // console.log(response);
-    this.setState(
-      {
-        email: response.profile.kakao_account.email,
-        name: response.profile.kakao_account.profile.nickname,
-        userLoginTypeCd: "011"
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-    // fetch(Kakao_Login, {
-    //   method: "post",
-    //   headers: { Authorization: localStorage.getItem("kakao_access_token") },
 
-    // })
-    // .then(res=>res.json())
-    // .then(localStorage.removeItem("kakao_access_token"))
-    // .then(res=>{
-    //   localStorage.getItem("access_token",res)
-    // })
-    // .then(this.props.history.push("/Shop"))
+    fetch(Kakao_Login, {
+      method: "post",
+      headers: { Authorization: localStorage.getItem("kakao_access_token") }
+    })
+      .then(res => res.json())
+      .then(localStorage.removeItem("kakao_access_token"))
+      .then(res => {
+        console.log(res);
+        if (res.MESSAGE === "SUCCESS") {
+          localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          this.props.history.push("/Shop");
+        } else if (res.MESSAGE !== "SUCCESS") {
+          alert("로그인에 실패했습니다.");
+        }
+      });
+    // .then(this.props.history.push("/Shop"));
   };
   //구글 로그인, fetch로 back에 보내고 확이 후 넘어가게 만들어야됨
 
