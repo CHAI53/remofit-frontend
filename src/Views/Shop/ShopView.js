@@ -63,14 +63,14 @@ export default class ShopView extends Component {
               <div className="hash-tag">
                 {this.state.data.shopTypeCd &&
                   this.state.data.shopTypeCd.map((e, index) => (
-                    <span>{"#" + e.tagName + " "}</span>
+                    <span key={index}>{"#" + e.tagName + " "}</span>
                   ))}
               </div>
               <div className="item-wrapper">
                 <Row type="flex" justify="center">
                   {this.state.data.item &&
                     this.state.data.item.map((e, index) => (
-                      <ShopFeeds>{e}</ShopFeeds>
+                      <ShopFeeds key={index}>{e}</ShopFeeds>
                     ))}
                 </Row>
               </div>

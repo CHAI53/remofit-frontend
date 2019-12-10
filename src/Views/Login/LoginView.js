@@ -9,9 +9,7 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import "./index.less";
 
 export default class LoginView extends Component {
-  state = {
-    userLoginTypeCd: "010"
-  };
+  state = {};
   Setemail = e => {
     this.setState({ id: e.target.value }, () => {
       console.log(this.state);
@@ -41,8 +39,7 @@ export default class LoginView extends Component {
     localStorage.setItem("fb_access_token", response.signedRequest);
     this.setState({
       name: response.name,
-      email: response.email,
-      userLoginTypeCd: "013"
+      email: response.email
     });
     console.log(this.state);
     // fetch(Facebook_Login, {
@@ -59,27 +56,35 @@ export default class LoginView extends Component {
   responseGoogle = response => {
     console.log("구글", response);
     localStorage.setItem("google_access_token", response.Zi.id_token);
-    this.setState(
-      { name: response.w3.ig, email: response.w3.U3, userLoginTypeCd: "012" },
-      () => {
-        console.log(this.state);
-      }
-    );
-    // fetch(Google_Login, {
-    //   method: "post",
-    //   headers: { Authorization: localStorage.getItem("google_access_token") },
-    //   body: JSON.stringify({
-    //     email: this.state.email,
-    //     name: this.state.name,
-    //     userLoginTypeCd: this.state.userLoginTypeCd
-    //   })
-    // });
-    // this.props.history.push("/Shop");
+    this.setState({ name: response.w3.ig, email: response.w3.U3 }, () => {
+      console.log(this.state);
+    });
+    fetch(Google_Login, {
+      method: "post",
+      headers: { Authorization: localStorage.getItem("google_access_token") }
+    })
+      .then(res => res.json())
+      // .then(localStorage.removeItem("google_access_token"))
+      .then(res => {
+        console.log(res);
+        if (res !== "") {
+          localStorage.setItem("goo_access_token", res.hi);
+          this.props.history.push("/Shop");
+        } else if (res === "") {
+          alert("token이 없어요");
+        }
+      });
+    // .then(res=>{
+    //   localStorage.setItem("access_token", res.hi)
+    //   this.props.history.push("/Shop")
+    // })
+    //if문 정상작동 하면 그대로 사용하고 , 이상있으면 주석처리한 .then 사용
   };
+  //res.hi 를 제대로된 이름으로 변경해야함
 
   responseKakao = response => {
     console.log(response);
-    localStorage.setItem("kakao_access_token", response.response.refresh_token);
+    localStorage.setItem("kakao_access_token", response.response.access_token);
     // console.log(response);
     this.setState(
       {
@@ -94,12 +99,14 @@ export default class LoginView extends Component {
     // fetch(Kakao_Login, {
     //   method: "post",
     //   headers: { Authorization: localStorage.getItem("kakao_access_token") },
-    //   body: JSON.stringify({
-    //     email: this.state.email,
-    //     name: this.state.name,
-    //     userLoginTypeCd: this.state.userLoginTypeCd
-    //   })
-    // });
+
+    // })
+    // .then(res=>res.json())
+    // .then(localStorage.removeItem("kakao_access_token"))
+    // .then(res=>{
+    //   localStorage.getItem("access_token",res)
+    // })
+    // .then(this.props.history.push("/Shop"))
   };
   //구글 로그인, fetch로 back에 보내고 확이 후 넘어가게 만들어야됨
 

@@ -1,7 +1,7 @@
 const ShowMockup = "http://localhost:3000/data/Show.json";
 const login = "http://localhost:8000";
 const mockup = "http://localhost:3000/data/mockup.json";
-const Google_Login = "http://";
+const Google_Login = "http://192.168.1.103:8000/user/google";
 const Facebook_Login = "http://";
 const Kakao_Login = "http://";
 export { ShowMockup, login, mockup, Google_Login, Facebook_Login, Kakao_Login };

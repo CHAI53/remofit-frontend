@@ -11,11 +11,12 @@ export default class ShopFeeds extends Component {
     const t2 = moment();
     const t1 = moment(this.props.children.time, "YYYY-MM-DD HH:mm:ss");
     const gap = moment.duration(t1.diff(t2)).asMilliseconds();
+    const deadline = Date.now();
 
     const { children } = this.props;
     const { Meta } = Card;
     const { Countdown } = Statistic;
-    const deadline = Date.now();
+    console.log(this.props);
 
     return (
       <>
