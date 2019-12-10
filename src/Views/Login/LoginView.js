@@ -56,28 +56,23 @@ export default class LoginView extends Component {
   responseGoogle = response => {
     console.log("구글", response);
     localStorage.setItem("google_access_token", response.Zi.id_token);
-    this.setState({ name: response.w3.ig, email: response.w3.U3 }, () => {
-      console.log(this.state);
-    });
+
     fetch(Google_Login, {
       method: "post",
       headers: { Authorization: localStorage.getItem("google_access_token") }
     })
       .then(res => res.json())
-      // .then(localStorage.removeItem("google_access_token"))
+      .then(localStorage.removeItem("google_access_token"))
       .then(res => {
         console.log(res);
-        if (res !== "") {
-          localStorage.setItem("goo_access_token", res.hi);
+        if (res.MESSAGE === "SIGNUP_SUCCESS") {
+          localStorage.setItem("accesstoken", res.Access_token);
           this.props.history.push("/Shop");
-        } else if (res === "") {
-          alert("token이 없어요");
+        } else if (res.MESSAGE !== "SIGNUP_SUCCESS") {
+          alert("로그인에 실패했습니다.");
         }
       });
-    // .then(res=>{
-    //   localStorage.setItem("access_token", res.hi)
-    //   this.props.history.push("/Shop")
-    // })
+
     //if문 정상작동 하면 그대로 사용하고 , 이상있으면 주석처리한 .then 사용
   };
   //res.hi 를 제대로된 이름으로 변경해야함

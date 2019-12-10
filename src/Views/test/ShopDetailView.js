@@ -8,7 +8,8 @@ import {
   Divider,
   Input,
   Button,
-  Tabs
+  Tabs,
+  BackTop
 } from "antd";
 import { mockup } from "config.js";
 import "./index.less";
@@ -100,7 +101,7 @@ export default class ShopDetailView extends Component {
             xl={14}
             type="flex"
             justify="center"
-            style={{ padding: "0 5%" }}
+            style={{ padding: "0 3%" }}
           >
             <Row type="flex" justify="center" align="middle">
               <Col span={24}>
@@ -197,6 +198,7 @@ export default class ShopDetailView extends Component {
             </Row>
           </Col>
         </Row>
+        <BackTop style={{ right: 10, bottom: 10 }} />
       </>
     );
   }
