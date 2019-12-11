@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Row, Col, Card, Form, Input, Button, Checkbox } from "antd";
-// import { API } from "src/config.js";
+import { Row, Col, Card, Form, Input, Button, Checkbox, Icon } from "antd";
+// import { mockup } from "src/config.js";
 import "./index.less";
 
 export default class SignupView extends Component {
@@ -13,19 +13,34 @@ export default class SignupView extends Component {
   };
 
   handleSubmit = e => {
-    // e.preventDefault();
-    // const { email, password, passwordChk } = this.state;
-    // if (email && password && passwordChk && password === passwordChk) {
-    //   fetch(`${API}/account/signup`, {
+    e.preventDefault();
+    // const {
+    //   email,
+    //   password,
+    //   passwordChk,
+    //   isAgreed,
+    //   userLoginTypeCd
+    // } = this.state;
+    // if (
+    //   email &&
+    //   password &&
+    //   passwordChk &&
+    //   password === passwordChk &&
+    //   isAgreed &&
+    //   userLoginTypeCd
+    // ) {
+    //   fetch(mockup, {
     //     method: "post",
     //     body: JSON.stringify({
     //       email,
     //       password,
+    //       isAgreed,
     //       userLoginTypeCd
     //     })
     //   })
     //     .then(res => res.json())
     //     .then(res => {
+    //       console.log("이메일가입정보 전송완료");
     //       return this.goToLogin();
     //     });
     // }
@@ -54,7 +69,7 @@ export default class SignupView extends Component {
   };
 
   goToLogin = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {
@@ -66,12 +81,18 @@ export default class SignupView extends Component {
         <Col xs={24} xl={8}>
           <Card className="signupCard">
             <Form onSubmit={this.handleSubmit} className="signupForm">
+              <div className="title">회원가입</div>
+              <br />
+              <br />
               <Form.Item className="formInput">
                 <Input
                   name="email"
                   placeholder="이메일"
                   size="large"
                   onChange={this.handleChange}
+                  prefix={
+                    <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
+                  }
                 />
                 {email && (!email.includes("@") || !email.includes(".")) ? (
                   <div> 이메일 형식이 올바르지 않습니다.</div>
@@ -85,6 +106,9 @@ export default class SignupView extends Component {
                   placeholder="비밀번호"
                   size="large"
                   onChange={this.handleChange}
+                  prefix={
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                  }
                 />
               </Form.Item>
               <Form.Item className="formInput">
@@ -93,6 +117,9 @@ export default class SignupView extends Component {
                   placeholder="비밀번호 확인"
                   size="large"
                   onChange={this.handleChange}
+                  prefix={
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                  }
                 />
                 {password && password !== passwordChk ? (
                   <div> 동일한 비밀번호를 입력해주세요</div>

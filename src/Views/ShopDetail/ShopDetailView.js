@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { mockup } from "config.js";
 import "./index.less";
+import moment from "moment";
 import ShopItemMaster from "./ShopItemMaster";
 import ShopCarousel from "./ShopCarousel";
 
@@ -46,16 +47,44 @@ export default class ShopDetailView extends Component {
       () => console.log("input entered")
     );
 
+  handleClick = e => {
+    let stock = this.state.data.stock;
+
+    fetch(mockup, {
+      method: "post",
+      body: JSON.stringify({
+        stock: stock - 1
+      })
+    })
+      .then(res => res.json())
+      .then(info => {
+        this.setState(
+          {
+            data: info
+          },
+          () => {
+            console.log("data reeeeeetaken", this.state);
+          }
+        );
+      });
+  };
+
   render() {
     const { Countdown } = Statistic;
     const { TabPane } = Tabs;
-    const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
     const { data } = this.state;
+    const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
+    console.log("현재시각", nowDate);
+    const endDate = data.endDate;
+    console.log("마감시각", endDate);
+    const deadline = moment(endDate).diff(nowDate) + Date.now();
+    console.log("남은시간", deadline);
 
     function onFinish() {
       console.log("finished!");
     }
     console.log(this.state);
+
     return (
       <Row type="flex" justify="center">
         <Col className="photoCol" xs={24} xl={8}>
@@ -63,8 +92,8 @@ export default class ShopDetailView extends Component {
             hoverable
             style={{
               width: 350,
-              height: 500,
-              margin: "20%",
+              height: 450,
+              marginTop: "10%",
               borderRadius: "5px"
             }}
             cover={
@@ -131,7 +160,13 @@ export default class ShopDetailView extends Component {
           </Row>
           <Row type="flex" justify="center" align="middle">
             <Col span={24}>
-              <Button className="purchaseBtn" type="primary" block size="large">
+              <Button
+                className="purchaseBtn"
+                type="primary"
+                block
+                size="large"
+                onClick={this.handleClick}
+              >
                 ￦3,000 경험하기 (VAT 별도)
               </Button>
             </Col>

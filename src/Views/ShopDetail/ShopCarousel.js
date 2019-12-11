@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Meta } from "antd";
+import { Card } from "antd";
 
 class ShopCarousel extends Component {
   render() {
@@ -8,8 +8,10 @@ class ShopCarousel extends Component {
     return (
       <Card
         hoverable
-        style={{ width: 350 }}
-        cover={<img alt="carousel" src={children} />}
+        style={{ width: "auto", borderRadius: "5px" }}
+        cover={
+          <img alt="carousel" src={children} style={{ borderRadius: "5px" }} />
+        }
       />
     );
   }
