@@ -79,7 +79,12 @@ export default class SignupView extends Component {
     return (
       <Row type="flex" justify="center">
         <Col xs={24} xl={8}>
-          <Card className="signupCard">
+          <Card
+            className="signupCard"
+            style={{
+              backgroundImage: "-webkit-linear-gradient(top, #fff, #E2E4E4)"
+            }}
+          >
             <Form onSubmit={this.handleSubmit} className="signupForm">
               <div className="title">회원가입</div>
               <br />
@@ -138,6 +143,7 @@ export default class SignupView extends Component {
                   htmlType="submit"
                   size="large"
                   className="login-form-button"
+                  style={{ color: "black", fontWeight: 600 }}
                 >
                   가입하기
                 </Button>

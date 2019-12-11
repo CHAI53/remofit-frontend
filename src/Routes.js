@@ -4,6 +4,7 @@ import Signup from "./Views/Signup";
 import Login from "./Views/Login";
 import Shop from "./Views/Shop";
 import ShopDetail from "./Views/ShopDetail";
+import test from "./Views/test";
 
 export class Routes extends React.Component {
   render() {
@@ -14,6 +15,7 @@ export class Routes extends React.Component {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/shopdetail" component={ShopDetail} />
+          <Route exact path="/test" component={test} />
         </Switch>
       </Router>
     );

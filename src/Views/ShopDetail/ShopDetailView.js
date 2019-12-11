@@ -86,7 +86,7 @@ export default class ShopDetailView extends Component {
     console.log(this.state);
 
     return (
-      <Row type="flex" justify="center">
+      <Row type="flex" justify="center" z>
         <Col className="photoCol" xs={24} xl={8}>
           <Card
             hoverable

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Card, BackTop, Statistic } from "antd";
+import { Row, Card, BackTop } from "antd";
 import { ShowMockup } from "config.js";
 import "./index.less";
 import ShopFeeds from "./ShopFeeds.js";
@@ -63,14 +63,14 @@ export default class ShopView extends Component {
               <div className="hash-tag">
                 {this.state.data.shopTypeCd &&
                   this.state.data.shopTypeCd.map((e, index) => (
-                    <span>{"#" + e.tagName + " "}</span>
+                    <span key={index}>{"#" + e.tagName + " "}</span>
                   ))}
               </div>
               <div className="item-wrapper">
                 <Row type="flex" justify="center">
                   {this.state.data.item &&
                     this.state.data.item.map((e, index) => (
-                      <ShopFeeds>{e}</ShopFeeds>
+                      <ShopFeeds key={index}>{e}</ShopFeeds>
                     ))}
                 </Row>
               </div>
