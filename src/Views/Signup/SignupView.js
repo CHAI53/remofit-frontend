@@ -143,7 +143,7 @@ export default class SignupView extends Component {
                   htmlType="submit"
                   size="large"
                   className="login-form-button"
-                  style={{ color: "black", fontWeight: 600 }}
+                  style={{ color: "#EAECEC", fontWeight: 600 }}
                 >
                   가입하기
                 </Button>

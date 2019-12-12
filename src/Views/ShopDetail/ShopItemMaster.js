@@ -6,7 +6,7 @@ export default class ShopItemMaster extends Component {
   render() {
     const master = this.props;
     return (
-      <Card style={{ width: 820 }}>
+      <Card style={{ width: "100%" }}>
         <p className="bold">용량 또는 중량</p>
         <p> {master.size}</p>
         <p className="bold">제조연월일</p>
