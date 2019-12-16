@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Form, Icon, Input, Button } from "antd";
 import { isFulfilled } from "q";
-import { loginimg, Google_Login, Facebook_Login, Kakao_Login } from "config.js";
+import {
+  loginimg,
+  Google_Login,
+  Facebook_Login,
+  Kakao_Login,
+  email_Login
+} from "config.js";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import KakaoLogin from "react-kakao-login";
@@ -22,39 +28,48 @@ export default class LoginView extends Component {
     });
   };
 
-  HandleClick = e => {
-    fetch("", {
+  HandleClick = () => {
+    fetch("email_Login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: this.state.id,
-        pw: this.state.pw,
-        userLoginTypeCd: this.state.userLoginTypeCd
+        pw: this.state.pw
       })
-    });
+    })
+      .then(res => res.json())
+      .then(res => {
+        localStorage.setItem("accesstoken", res.example);
+      }, this.props.history.push("/Shop"));
   };
 
   fb = response => {
     console.log(response);
-    localStorage.setItem("fb_access_token", response.signedRequest);
+    localStorage.setItem("fb_access_token", response.accessToken);
     this.setState({
       name: response.name,
       email: response.email
     });
     console.log(this.state);
-    // fetch(Facebook_Login, {
-    //   method: "post",
-    //   headers: { Authorization: localStorage.getItem("fb_access_token") },
-    //   body: JSON.stringify({
-    //     email: this.state.email,
-    //     name: this.state.name,
-    //     userLoginTypeCd: this.state.userLoginTypeCd
-    //   })
-    // });
+    fetch(Facebook_Login, {
+      method: "post",
+      headers: { Authorization: localStorage.getItem("fb_access_token") }
+    })
+      .then(res => res.json())
+      .then(localStorage.removeItem("fb_access_token"))
+      .then(res => {
+        console.log(res);
+        if (res.MESSAGE === "SUCCESS") {
+          localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          this.props.history.push("/Shop");
+        } else if (res.MESSAGE !== "SUCCESS") {
+          alert("로그인에 실패했습니다.");
+        }
+      });
   };
 
   responseGoogle = response => {
-    console.log("구글", response);
+    // console.log("구글", response);
     localStorage.setItem("google_access_token", response.Zi.id_token);
 
     fetch(Google_Login, {
@@ -64,7 +79,7 @@ export default class LoginView extends Component {
       .then(res => res.json())
       .then(localStorage.removeItem("google_access_token"))
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.MESSAGE === "SIGNUP_SUCCESS") {
           localStorage.setItem("accesstoken", res.Access_token);
           this.props.history.push("/Shop");
@@ -78,9 +93,8 @@ export default class LoginView extends Component {
   //res.hi 를 제대로된 이름으로 변경해야함
 
   responseKakao = response => {
-    console.log(response);
-    localStorage.setItem("kakao_access_token", response.response.access_token);
     // console.log(response);
+    localStorage.setItem("kakao_access_token", response.response.access_token);
 
     fetch(Kakao_Login, {
       method: "post",
@@ -89,7 +103,7 @@ export default class LoginView extends Component {
       .then(res => res.json())
       .then(localStorage.removeItem("kakao_access_token"))
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.MESSAGE === "SUCCESS") {
           localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
           this.props.history.push("/Shop");
@@ -97,9 +111,7 @@ export default class LoginView extends Component {
           alert("로그인에 실패했습니다.");
         }
       });
-    // .then(this.props.history.push("/Shop"));
   };
-  //구글 로그인, fetch로 back에 보내고 확이 후 넘어가게 만들어야됨
 
   render() {
     const failure = console.error;

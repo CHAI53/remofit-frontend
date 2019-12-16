@@ -51,7 +51,7 @@ export default class ShopFeeds extends Component {
             display: "inline-block",
             margin: 30,
             overflow: "hidden",
-            borderRadius: "30px"
+            borderRadius: "10px"
           }}
           hoverable
         >
