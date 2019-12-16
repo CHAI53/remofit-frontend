@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Card, Form, Input, Button, Checkbox, Icon } from "antd";
-// import { mockup } from "src/config.js";
+import { signup } from "config.js";
 import "./index.less";
 
 export default class SignupView extends Component {
@@ -9,51 +9,56 @@ export default class SignupView extends Component {
     password: "",
     passwordChk: "",
     isAgreed: false,
+    userTypeCd: "002",
     userLoginTypeCd: "010"
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   email,
-    //   password,
-    //   passwordChk,
-    //   isAgreed,
-    //   userLoginTypeCd
-    // } = this.state;
-    // if (
-    //   email &&
-    //   password &&
-    //   passwordChk &&
-    //   password === passwordChk &&
-    //   isAgreed &&
-    //   userLoginTypeCd
-    // ) {
-    //   fetch(mockup, {
-    //     method: "post",
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //       isAgreed,
-    //       userLoginTypeCd
-    //     })
-    //   })
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       console.log("이메일가입정보 전송완료");
-    //       return this.goToLogin();
-    //     });
-    // }
+    const {
+      email,
+      password,
+      passwordChk,
+      isAgreed,
+      userTypeCd,
+      userLoginTypeCd
+    } = this.state;
+    if (
+      email &&
+      password &&
+      passwordChk &&
+      password === passwordChk &&
+      isAgreed === true &&
+      userTypeCd &&
+      userLoginTypeCd
+    ) {
+      fetch(signup, {
+        method: "post",
+        body: JSON.stringify({
+          email,
+          password,
+          isAgreed,
+          userTypeCd,
+          userLoginTypeCd
+        })
+      })
+        .then(res => res.json())
+        .catch(console.log("실패"))
+        .then(res => {
+          console.log(res, "이메일가입정보 전송완료");
+          return this.goToLogin();
+        });
+    }
   };
 
   handleChange = e => {
     this.setState(
       {
         [e.target.name]: e.target.value
-      },
-      () => {
-        console.log("input ok");
       }
+      // // () => {
+      // //   console.log("input ok");
+      // // }
     );
   };
 
@@ -61,20 +66,20 @@ export default class SignupView extends Component {
     this.setState(
       {
         isAgreed: true
-      },
-      () => {
-        console.log("agreeeee");
       }
+      // () => {
+      //   console.log("agreeeee");
+      // }
     );
   };
 
   goToLogin = () => {
-    this.props.history.push("/");
+    this.props.history.push("/shopdetail");
   };
 
   render() {
     const { email, password, passwordChk } = this.state;
-    console.log(email, password, passwordChk);
+    //console.log(email, password, passwordChk);
 
     return (
       <Row type="flex" justify="center">
