@@ -10,7 +10,10 @@ export default class SignupView extends Component {
     passwordChk: "",
     isAgreed: false,
     userTypeCd: "002",
-    userLoginTypeCd: "010"
+    userLoginTypeCd: "010",
+    name: null,
+    snsid: null,
+    receivingEmail: null
   };
 
   handleSubmit = e => {
@@ -21,7 +24,10 @@ export default class SignupView extends Component {
       passwordChk,
       isAgreed,
       userTypeCd,
-      userLoginTypeCd
+      userLoginTypeCd,
+      name,
+      snsid,
+      receivingEmail
     } = this.state;
     if (
       email &&
@@ -35,6 +41,9 @@ export default class SignupView extends Component {
       fetch(signup, {
         method: "post",
         body: JSON.stringify({
+          name,
+          snsid,
+          receivingEmail,
           email,
           password,
           isAgreed,
@@ -74,7 +83,7 @@ export default class SignupView extends Component {
   };
 
   goToLogin = () => {
-    this.props.history.push("/shopdetail");
+    this.props.history.push("/");
   };
 
   render() {
