@@ -16,7 +16,7 @@ export default class ShopFeeds extends Component {
     const { children } = this.props;
     const { Meta } = Card;
     const { Countdown } = Statistic;
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <>

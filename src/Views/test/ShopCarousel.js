@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Meta } from "antd";
+// import { Card, Meta } from "antd";
 
 class ShopCarousel extends Component {
   render() {

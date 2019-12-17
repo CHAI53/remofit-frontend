@@ -29,17 +29,20 @@ export default class LoginView extends Component {
   };
 
   HandleClick = () => {
-    fetch("email_Login", {
+    fetch(email_Login, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: this.state.id,
-        pw: this.state.pw
+        email: this.state.id,
+        password: this.state.pw
       })
     })
       .then(res => res.json())
       .then(res => {
-        localStorage.setItem("accesstoken", res.example);
+        console.log(res);
+      })
+      .then(res => {
+        localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
       }, this.props.history.push("/Shop"));
   };
 
@@ -183,6 +186,7 @@ export default class LoginView extends Component {
                         block
                         htmlType="submit"
                         className="email"
+                        onClick={this.HandleClick}
                       >
                         이메일 로그인
                       </Button>
