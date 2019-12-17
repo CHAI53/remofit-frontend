@@ -137,7 +137,7 @@ export default class ShopDetailView extends Component {
                   onFinish={onFinish}
                   style={{
                     display: "inline-block",
-                    margin: " 10px 60px 10px 0",
+                    margin: " 10px 40px 10px 0",
                     fontWeight: "700",
                     width: "100px",
                     paddingLeft: "20px"
@@ -207,6 +207,7 @@ export default class ShopDetailView extends Component {
                       className="productImg"
                       src={data.itemInformationImg}
                       alt=""
+                      style={{ width: "100%" }}
                     />
                   </TabPane>
                 </Tabs>
