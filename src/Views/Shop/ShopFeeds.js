@@ -16,7 +16,7 @@ export default class ShopFeeds extends Component {
     const { children } = this.props;
     const { Meta } = Card;
     const { Countdown } = Statistic;
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <>
@@ -51,7 +51,7 @@ export default class ShopFeeds extends Component {
             display: "inline-block",
             margin: 30,
             overflow: "hidden",
-            borderRadius: "30px"
+            borderRadius: "10px"
           }}
           hoverable
         >

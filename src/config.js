@@ -1,13 +1,13 @@
 const ShowMockup = "http://localhost:3000/data/Show.json";
-const login = "http://localhost:8000";
+const email_Login = "http://192.168.1.111:8000/user/signin";
 const mockup = "http://localhost:3000/data/mockup.json";
 const Google_Login = "http://192.168.1.103:8000/user/google";
-const Facebook_Login = "http://";
+const Facebook_Login = "http://192.168.1.111:8000/user/signin/facebook";
 const Kakao_Login = "http://192.168.1.111:8000/user/signin/kakao";
-const signup = "http://192.168.1.103:8000/user/signup";
+const signup = "http://192.168.1.111:8000/user/signup";
 export {
   ShowMockup,
-  login,
+  email_Login,
   mockup,
   Google_Login,
   Facebook_Login,

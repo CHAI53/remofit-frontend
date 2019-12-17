@@ -102,8 +102,8 @@ export default class ShopDetailView extends Component {
               cover={
                 <Carousel autoplay>
                   {data.itemImg &&
-                    data.itemImg.map(item => (
-                      <ShopCarousel>{item.url}</ShopCarousel>
+                    data.itemImg.map((item, index) => (
+                      <ShopCarousel key={index}>{item.url}</ShopCarousel>
                     ))}
                 </Carousel>
               }
