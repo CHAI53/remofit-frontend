@@ -75,7 +75,7 @@ export default class ShopDetailView extends Component {
           헤더.
         </div>
         <Row type="flex" justify="center">
-          <Col className="photoCol" xs={24} xl={8}>
+          <Col className="photoCol" xs={24} xl={8} type="flex" justify="center">
             <Card
               hoverable
               style={{

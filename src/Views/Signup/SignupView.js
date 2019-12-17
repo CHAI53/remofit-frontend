@@ -64,10 +64,10 @@ export default class SignupView extends Component {
     this.setState(
       {
         [e.target.name]: e.target.value
+      },
+      () => {
+        console.log("input ok");
       }
-      // // () => {
-      // //   console.log("input ok");
-      // // }
     );
   };
 
@@ -75,10 +75,10 @@ export default class SignupView extends Component {
     this.setState(
       {
         isAgreed: true
+      },
+      () => {
+        console.log("agreeeee");
       }
-      // () => {
-      //   console.log("agreeeee");
-      // }
     );
   };
 
@@ -88,7 +88,7 @@ export default class SignupView extends Component {
 
   render() {
     const { email, password, passwordChk } = this.state;
-    //console.log(email, password, passwordChk);
+    console.log(email, password, passwordChk);
 
     return (
       <Row type="flex" justify="center">
