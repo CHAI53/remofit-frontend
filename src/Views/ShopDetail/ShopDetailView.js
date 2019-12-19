@@ -17,6 +17,7 @@ import moment from "moment";
 import { withRouter } from "react-router-dom";
 import ShopItemMaster from "./ShopItemMaster";
 import ShopCarousel from "./ShopCarousel";
+import { withRouter } from "react-router-dom";
 
 const axios = require("axios");
 
@@ -34,7 +35,7 @@ class ShopDetailView extends Component {
     })
       .then(res => console.log("데이터는 받아왔니", this.props))
       .then(info => {
-        console.log(info);
+        console.log("데이터 받아오기", info);
         this.setState(
           {
             data: info
