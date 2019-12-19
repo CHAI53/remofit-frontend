@@ -2,10 +2,17 @@ import React, { Component } from "react";
 import { Card, Statistic } from "antd";
 import "./index.less";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-export default class ShopFeeds extends Component {
+class ShopFeeds extends Component {
   state = {};
+
+  GoodsClick = () => {
+    // console.log("11", this.props.children.itemId);
+    // console.log("props확인", this.props);
+
+    this.props.history.push(`/shopdetail?itemId=${this.props.children.itemId}`);
+  };
 
   render() {
     const t2 = moment();
@@ -16,35 +23,35 @@ export default class ShopFeeds extends Component {
     const { children } = this.props;
     const { Meta } = Card;
     const { Countdown } = Statistic;
-    // console.log(this.props);
+    // console.log("props로받아오는것", this.props);
+    // console.log(this.props.children.itemId);
 
     return (
       <>
         <Card
           cover={
-            <Link to="/shopdetail">
-              <div
-                className="item"
-                style={{
-                  backgroundImage: `url(${children.itemImg})`
-                }}
-              >
-                {gap > 0 ? (
-                  <Countdown
-                    className="counttest"
-                    value={deadline + gap}
-                    valueStyle={{
-                      fontSize: "29px",
-                      color: "#ffffff",
-                      fontWeight: "700",
-                      textShadow: "1px 1px 2px black"
-                    }}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
-            </Link>
+            <div
+              className="item"
+              style={{
+                backgroundImage: `url(${children.itemImg})`
+              }}
+              onClick={this.GoodsClick}
+            >
+              {gap > 0 ? (
+                <Countdown
+                  className="counttest"
+                  value={deadline + gap}
+                  valueStyle={{
+                    fontSize: "29px",
+                    color: "#ffffff",
+                    fontWeight: "700",
+                    textShadow: "1px 1px 2px black"
+                  }}
+                />
+              ) : (
+                ""
+              )}
+            </div>
           }
           style={{
             width: 300,
@@ -61,3 +68,5 @@ export default class ShopFeeds extends Component {
     );
   }
 }
+
+export default withRouter(ShopFeeds);

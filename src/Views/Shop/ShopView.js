@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Card, BackTop } from "antd";
-import { ShowMockup } from "config.js";
+import { Show } from "config.js";
 import "./index.less";
 import ShopFeeds from "./ShopFeeds.js";
 
@@ -14,7 +14,7 @@ export default class ShopView extends Component {
     };
   }
   componentDidMount() {
-    fetch(ShowMockup, {
+    fetch(Show, {
       method: "get"
     })
       .then(res => res.json())
@@ -24,7 +24,7 @@ export default class ShopView extends Component {
             data: info
           },
           () => {
-            // console.log("데이터받아온 후", this.state);
+            console.log("데이터받아온 후", this.state);
           }
         );
       });

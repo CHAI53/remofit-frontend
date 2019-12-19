@@ -11,24 +11,28 @@ import {
   Tabs,
   BackTop
 } from "antd";
-import { mockup } from "config.js";
+import { mockup, Detail } from "config.js";
 import "./index.less";
 import moment from "moment";
 import ShopItemMaster from "./ShopItemMaster";
 import ShopCarousel from "./ShopCarousel";
+import { withRouter } from "react-router-dom";
 
-export default class ShopDetailView extends Component {
+export class ShopDetailView extends Component {
   state = {
     data: [],
     optionDescription: ""
   };
 
   componentDidMount() {
-    fetch(mockup, {
+    console.log("???", this.props);
+
+    fetch(Detail, {
       method: "get"
     })
       .then(res => res.json())
       .then(info => {
+        console.log("데이터 받아오기", info);
         this.setState(
           {
             data: info
@@ -220,3 +224,5 @@ export default class ShopDetailView extends Component {
     );
   }
 }
+
+export default withRouter(ShopDetailView);
