@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Form, Icon, Input, Button } from "antd";
+import { Card, Row, Col, Form, Icon, Input, Button, Alert } from "antd";
 import { isFulfilled } from "q";
 import {
   loginimg,
@@ -34,36 +34,39 @@ export default class LoginView extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.state.id,
-        password: this.state.pw
+        password: this.state.pw,
+        userLoginTypeCd: "010"
       })
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-      })
-      .then(res => {
-        localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
-      }, this.props.history.push("/Shop"));
+        // console.log(res);
+        if (res.MESSAGE === "SUCCESS") {
+          localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          localStorage.setItem("refreshtoken", res.REFRESH_TOKEN);
+          alert("이메일로 로그인 되었습니다.");
+          this.props.history.push("/Shop");
+        } else if (res.MESSAGE !== "SUCCESS") {
+          alert("로그인에 실패했습니다.");
+        }
+      });
   };
 
   fb = response => {
     console.log(response);
     localStorage.setItem("fb_access_token", response.accessToken);
-    this.setState({
-      name: response.name,
-      email: response.email
-    });
-    console.log(this.state);
+
     fetch(Facebook_Login, {
       method: "post",
       headers: { Authorization: localStorage.getItem("fb_access_token") }
     })
-      .then(res => res.json())
-      .then(localStorage.removeItem("fb_access_token"))
+      .then(res => res.json(), localStorage.removeItem("fb_access_token"))
       .then(res => {
         console.log(res);
         if (res.MESSAGE === "SUCCESS") {
           localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          localStorage.setItem("refreshtoken", res.REFRESH_TOKEN);
+          alert(<Alert message="Success Text" type="success" />);
           this.props.history.push("/Shop");
         } else if (res.MESSAGE !== "SUCCESS") {
           alert("로그인에 실패했습니다.");
@@ -72,43 +75,48 @@ export default class LoginView extends Component {
   };
 
   responseGoogle = response => {
-    // console.log("구글", response);
+    console.log("구글에서 가져오는 것", response);
     localStorage.setItem("google_access_token", response.Zi.id_token);
 
     fetch(Google_Login, {
       method: "post",
       headers: { Authorization: localStorage.getItem("google_access_token") }
     })
-      .then(res => res.json())
-      .then(localStorage.removeItem("google_access_token"))
+      .then(res => res.json(), localStorage.removeItem("google_access_token"))
       .then(res => {
-        // console.log(res);
-        if (res.MESSAGE === "SIGNUP_SUCCESS") {
-          localStorage.setItem("accesstoken", res.Access_token);
-          this.props.history.push("/Shop");
-        } else if (res.MESSAGE !== "SIGNUP_SUCCESS") {
+        console.log("fetch 후 응답", res);
+        if (res.MESSAGE === "SUCCESS") {
+          localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          localStorage.setItem("refreshtoken", res.REFRESH_TOKEN);
+          alert("구글로 로그인 되었습니다.");
+          // this.props.history.push("/Shop");
+        } else if (res.MESSAGE !== "SUCCESS") {
           alert("로그인에 실패했습니다.");
         }
-      });
+      })
+
+      .catch("구글 error");
 
     //if문 정상작동 하면 그대로 사용하고 , 이상있으면 주석처리한 .then 사용
   };
   //res.hi 를 제대로된 이름으로 변경해야함
 
   responseKakao = response => {
-    // console.log(response);
+    // console.log("카카오로그인", response);
     localStorage.setItem("kakao_access_token", response.response.access_token);
 
     fetch(Kakao_Login, {
       method: "post",
       headers: { Authorization: localStorage.getItem("kakao_access_token") }
     })
-      .then(res => res.json())
-      .then(localStorage.removeItem("kakao_access_token"))
+      // .then(res => res.json())
+      // .then(localStorage.removeItem("kakao_access_token"))
+      .then(res => res.json(), localStorage.removeItem("kakao_access_token"))
       .then(res => {
-        // console.log(res);
         if (res.MESSAGE === "SUCCESS") {
           localStorage.setItem("accesstoken", res.ACCESS_TOKEN);
+          localStorage.setItem("refreshtoken", res.REFRESH_TOKEN);
+          alert("카카오로 로그인 되었습니다.");
           this.props.history.push("/Shop");
         } else if (res.MESSAGE !== "SUCCESS") {
           alert("로그인에 실패했습니다.");

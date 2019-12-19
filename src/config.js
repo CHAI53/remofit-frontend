@@ -1,12 +1,16 @@
-const ShowMockup = "http://localhost:3000/data/Show.json";
+// const ShowMockup = "http://localhost:3000/data/Show.json";
+const Show = "http://192.168.1.103:8000/user/shop";
 const email_Login = "http://192.168.1.111:8000/user/signin";
 const mockup = "http://localhost:3000/data/mockup.json";
 const Google_Login = "http://192.168.1.103:8000/user/google";
 const Facebook_Login = "http://192.168.1.111:8000/user/signin/facebook";
 const Kakao_Login = "http://192.168.1.111:8000/user/signin/kakao";
-const signup = "http://192.168.1.111:8000/user/signup";
+const signup = "http://192.168.1.103:8000/user/signup";
+const Detail = "http://192.168.1.111:8000/item/detail?itemId=1";
+// http://192.168.1.111:8000/item/detail?itemId=1
 export {
-  ShowMockup,
+  Detail,
+  Show,
   email_Login,
   mockup,
   Google_Login,

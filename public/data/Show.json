@@ -5,39 +5,39 @@
   "shopSubTi": "리커버리 건강 브랜드",
   "shopTypeCd": [
     {
-      "tagID": "1",
+      "tagId": "1",
       "tagName": "건강식품"
     },
     {
-      "tagID": "2",
+      "tagId": "2",
       "tagName": "라플레"
     },
     {
-      "tagID": "3",
+      "tagId": "3",
       "tagName": "암환자"
     },
     {
-      "tagID": "4",
+      "tagId": "4",
       "tagName": "면역력"
     },
     {
-      "tagID": "5",
+      "tagId": "5",
       "tagName": "항산화"
     },
     {
-      "tagID": "6",
+      "tagId": "6",
       "tagName": "장건강"
     },
     {
-      "tagID": "7",
+      "tagId": "7",
       "tagName": "베타글루칸"
     },
     {
-      "tagID": "8",
+      "tagId": "8",
       "tagName": "비타민D"
     },
     {
-      "tagID": "9",
+      "tagId": "9",
       "tagName": "퀘르세틴"
     }
   ],

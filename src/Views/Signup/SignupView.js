@@ -52,7 +52,7 @@ export default class SignupView extends Component {
         })
       })
         .then(res => res.json())
-        .catch(console.log("실패"))
+
         .then(res => {
           console.log(res, "이메일가입정보 전송완료");
           return this.goToLogin();
