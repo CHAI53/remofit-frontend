@@ -4,7 +4,10 @@ const mockup = "http://localhost:3000/data/mockup.json";
 const Google_Login = "http://192.168.1.103:8000/user/google";
 const Facebook_Login = "http://192.168.1.111:8000/user/signin/facebook";
 const Kakao_Login = "http://192.168.1.111:8000/user/signin/kakao";
-const signup = "http://192.168.1.111:8000/user/signup";
+const signup = "http://192.168.1.103:8000/user/signup";
+const shopDetailGetAPI = "http://192.168.1.111:8000/item/detail?itemId=1";
+const shopDetailPostAPI = "http://192.168.1.111:8000/item";
+
 export {
   ShowMockup,
   email_Login,
@@ -12,7 +15,9 @@ export {
   Google_Login,
   Facebook_Login,
   Kakao_Login,
-  signup
+  signup,
+  shopDetailGetAPI,
+  shopDetailPostAPI
 };
 
 const loginimg =

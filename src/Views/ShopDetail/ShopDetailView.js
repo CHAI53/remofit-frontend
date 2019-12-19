@@ -11,30 +11,36 @@ import {
   Tabs,
   BackTop
 } from "antd";
-import { mockup } from "config.js";
+import { shopDetailGetAPI, shopDetailPostAPI } from "config.js";
 import "./index.less";
 import moment from "moment";
+import { withRouter } from "react-router-dom";
 import ShopItemMaster from "./ShopItemMaster";
 import ShopCarousel from "./ShopCarousel";
 
-export default class ShopDetailView extends Component {
+const axios = require("axios");
+
+class ShopDetailView extends Component {
   state = {
     data: [],
     optionDescription: ""
   };
 
   componentDidMount() {
-    fetch(mockup, {
-      method: "get"
+    axios({
+      method: "get",
+      url: shopDetailGetAPI + 
+      data: []
     })
-      .then(res => res.json())
+      .then(res => console.log("데이터는 받아왔니", this.props))
       .then(info => {
+        console.log(info);
         this.setState(
           {
             data: info
           },
           () => {
-            // console.log("data taken", this.state);
+            console.log("data taken", this.state);
           }
         );
       });
@@ -51,7 +57,7 @@ export default class ShopDetailView extends Component {
   handleClick = e => {
     let stock = this.state.data.stock;
 
-    fetch(mockup, {
+    fetch(shopDetailPostAPI, {
       method: "post",
       body: JSON.stringify({
         stock: stock - 1
@@ -75,11 +81,8 @@ export default class ShopDetailView extends Component {
     const { TabPane } = Tabs;
     const { data } = this.state;
     const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
-    //console.log("현재시각", nowDate);
     const endDate = data.endDate;
-    //console.log("마감시각", endDate);
     const deadline = moment(endDate).diff(nowDate) + Date.now();
-    //console.log("남은시간", deadline);
 
     function onFinish() {
       console.log("finished!");
@@ -220,3 +223,5 @@ export default class ShopDetailView extends Component {
     );
   }
 }
+
+export default withRouter(ShopDetailView);
