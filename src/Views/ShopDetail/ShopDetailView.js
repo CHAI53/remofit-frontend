@@ -17,9 +17,8 @@ import moment from "moment";
 import { withRouter } from "react-router-dom";
 import ShopItemMaster from "./ShopItemMaster";
 import ShopCarousel from "./ShopCarousel";
-import { withRouter } from "react-router-dom";
 
-const axios = require("axios");
+// const axios = require("axios");
 
 class ShopDetailView extends Component {
   state = {
@@ -28,17 +27,15 @@ class ShopDetailView extends Component {
   };
 
   componentDidMount() {
-    axios({
-      method: "get",
-      url: shopDetailGetAPI + 
-      data: []
+    fetch(shopDetailGetAPI + this.props.location.search.split("=")[1], {
+      method: "get"
     })
-      .then(res => console.log("데이터는 받아왔니", this.props))
+      .then(res => res.json(), console.log("데이터는 받아왔니"))
       .then(info => {
         console.log("데이터 받아오기", info);
         this.setState(
           {
-            data: info
+            data: info.DATA
           },
           () => {
             console.log("data taken", this.state);
@@ -55,27 +52,27 @@ class ShopDetailView extends Component {
       () => console.log("input entered")
     );
 
-  handleClick = e => {
-    let stock = this.state.data.stock;
+  // handleClick = e => {
+  //   let stock = this.state.data.stock;
 
-    fetch(shopDetailPostAPI, {
-      method: "post",
-      body: JSON.stringify({
-        stock: stock - 1
-      })
-    })
-      .then(res => res.json())
-      .then(info => {
-        this.setState(
-          {
-            data: info
-          },
-          () => {
-            console.log("data reeeeeetaken", this.state);
-          }
-        );
-      });
-  };
+  //   fetch(shopDetailPostAPI, {
+  //     method: "post",
+  //     body: JSON.stringify({
+  //       stock: stock - 1
+  //     })
+  //   })
+  //     .then(res => res.json())
+  //     .then(info => {
+  //       this.setState(
+  //         {
+  //           stock: stock - 1
+  //         },
+  //         () => {
+  //           console.log("data reeeeeetaken", this.state);
+  //         }
+  //       );
+  //     });
+  // };
 
   render() {
     const { Countdown } = Statistic;
@@ -209,7 +206,9 @@ class ShopDetailView extends Component {
                   <TabPane tab="상품 이미지" key="2">
                     <img
                       className="productImg"
-                      src={data.itemInformationImg}
+                      src={
+                        data.itemInformationImg && data.itemInformationImg[0]
+                      }
                       alt=""
                       style={{ width: "100%" }}
                     />
