@@ -9,7 +9,7 @@ class ShopFeeds extends Component {
 
   GoodsClick = () => {
     // console.log("11", this.props.children.itemId);
-    // console.log("props확인", this.props);
+    console.log("props확인", this.props);
 
     this.props.history.push(`/shopdetail?itemId=${this.props.children.itemId}`);
   };

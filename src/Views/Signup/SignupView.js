@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Card, AutoComplete } from "antd";
+import { Row, Col, Card } from "antd";
 import "./index.less";
 import SignupFormWrapper from "./SignupForm";
 

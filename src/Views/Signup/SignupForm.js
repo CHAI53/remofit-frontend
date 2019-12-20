@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Icon, Checkbox, Button } from "antd";
+import { Form, Input, Icon, Checkbox, Button, Modal } from "antd";
 import { withRouter } from "react-router-dom";
 import { signup } from "config.js";
 import "./index.less";
@@ -11,6 +11,19 @@ const axios = require("axios");
 class SignupForm extends Component {
   state = {
     confirmDirty: false
+  };
+
+  error = () => {
+    Modal.error({
+      title: "중복 가입",
+      content: "가입이력이 있습니다. 확인해주세요."
+    });
+  };
+
+  success = () => {
+    Modal.success({
+      content: "회원가입이 완료되었습니다."
+    });
   };
 
   handleSubmit = e => {
@@ -27,7 +40,11 @@ class SignupForm extends Component {
           console.log(values);
           if (res.data.MESSAGE === "SIGNUP_SUCCESS") {
             console.log(res, "이메일가입정보 전송완료");
+            this.success();
             return this.goToLogin();
+          }
+          if (res.data.MESSAGE === "THIS_IS_EMAIL_ALREADY_EXIST") {
+            this.error();
           } else {
             console.log(res, "이메일가입 실패");
           }
